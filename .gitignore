@@ -1,0 +1,10 @@
+node_modules/
+.encryption-key
+server/uploads/
+server/*.db
+server/*.db-wal
+server/*.db-shm
+server/public/
+*.env
+.DS_Store
+client/dist/

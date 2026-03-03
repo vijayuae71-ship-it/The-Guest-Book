@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: the-guest-book
+    runtime: node
+    plan: free
+    buildCommand: cd server && npm install && cd ../client && npm install && npx vite build
+    startCommand: cd server && NODE_ENV=production node index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+    disk:
+      name: uploads
+      mountPath: /opt/render/project/src/server/uploads
+      sizeGB: 1
