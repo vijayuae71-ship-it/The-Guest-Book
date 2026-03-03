@@ -14,7 +14,6 @@ import Input from '../components/ui/Input';
 import Modal from '../components/ui/Modal';
 import { useUser } from '../context/UserContext';
 import { createEvent } from '../utils/api';
-import EventTemplatesPicker from '../components/event/EventTemplatesPicker';
 
 const RECENT_EVENTS_KEY = 'pd-events';
 
@@ -40,7 +39,6 @@ export default function CreateEvent() {
   const [hasPassword, setHasPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [selectedTemplate, setSelectedTemplate] = useState(null);
 
   // Name prompt modal
   const [showNameModal, setShowNameModal] = useState(false);
@@ -84,12 +82,6 @@ export default function CreateEvent() {
       };
       if (eventDate) data.eventDate = eventDate;
       if (hasPassword && password) data.password = password;
-      if (selectedTemplate) {
-        data.templateId = selectedTemplate.id;
-        data.accentColor = selectedTemplate.accent_color;
-        data.fontFamily = selectedTemplate.font_family;
-        data.coverLayout = selectedTemplate.cover_layout;
-      }
 
       const result = await createEvent(data);
       const evt = result.event || result;
@@ -214,12 +206,6 @@ export default function CreateEvent() {
                 </div>
               )}
             </div>
-
-            {/* Template picker */}
-            <EventTemplatesPicker
-              selectedTemplate={selectedTemplate}
-              onSelect={setSelectedTemplate}
-            />
           </div>
 
           {/* Error message */}
